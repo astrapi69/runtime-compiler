@@ -37,7 +37,8 @@ public class BaseJavaFileManager extends ForwardingJavaFileManager<JavaFileManag
 	}
 
 	/**
-	 * Initialize this {@link BaseJavaFileManager} object with the given arguments.
+	 * Initialize this {@link BaseJavaFileManager} object with the given java source file object and
+	 * the given compiled java file object.
 	 *
 	 * @param javaSourceFileObject
 	 *            the java source file object
