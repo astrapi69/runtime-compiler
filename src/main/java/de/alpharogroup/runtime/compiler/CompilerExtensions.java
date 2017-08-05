@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (C) 2015 Asterios Raptis
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package de.alpharogroup.runtime.compiler;
 
 import java.net.URI;
@@ -17,39 +41,35 @@ public class CompilerExtensions
 {
 
 	/**
-	 * Factory method for create an {@link URI} with the given uri string.
+	 * Generate a compilation stacktrace from the given parameter.
 	 *
-	 * @param uriString
-	 *            the uri string
-	 * @return the created {@link URI}.
+	 * @param diagnosticCollectors
+	 *            the diagnostic collectors
+	 * @return the generated stacktrace string.
 	 */
-	public static URI newURIQuietly(final String uriString)
+	public static String generateCompilationStacktrace(
+		final DiagnosticCollector<JavaFileObject> diagnosticCollectors)
 	{
-		try
+		final StringBuilder sb = new StringBuilder();
+		for (final Diagnostic<? extends JavaFileObject> diagnostic : diagnosticCollectors
+			.getDiagnostics())
 		{
-			final URI uri = newURI(uriString);
-			return uri;
+			sb.append(diagnostic.getMessage(null));
+			sb.append(SeparatorConstants.SEMI_COLON_WHITE_SPACE);
 		}
-		catch (final URISyntaxException e)
-		{
-			throw new CompilerRuntimeException(
-				"Given String " + uriString + " does not match to an uri", e);
-		}
+		return sb.toString();
 	}
 
 	/**
-	 * Factory method for create an {@link URI} with the given uri string.
+	 * Gets the class name with java file extension.
 	 *
-	 * @param uriString
-	 *            the uri string
-	 * @return the created {@link URI}.
-	 * @throws URISyntaxException
-	 *             the URI syntax exception
+	 * @param className
+	 *            the class name
+	 * @return the class name with extension
 	 */
-	public static URI newURI(final String uriString) throws URISyntaxException
+	public static String getClassNameWithExtension(final String className)
 	{
-		final URI uri = new URI(uriString);
-		return uri;
+		return new StringBuilder().append(className).append(Kind.SOURCE.extension).toString();
 	}
 
 	/**
@@ -72,35 +92,39 @@ public class CompilerExtensions
 	}
 
 	/**
-	 * Gets the class name with java file extension.
+	 * Factory method for create an {@link URI} with the given uri string.
 	 *
-	 * @param className
-	 *            the class name
-	 * @return the class name with extension
+	 * @param uriString
+	 *            the uri string
+	 * @return the created {@link URI}.
+	 * @throws URISyntaxException
+	 *             the URI syntax exception
 	 */
-	public static String getClassNameWithExtension(final String className)
+	public static URI newURI(final String uriString) throws URISyntaxException
 	{
-		return new StringBuilder().append(className).append(Kind.SOURCE.extension).toString();
+		final URI uri = new URI(uriString);
+		return uri;
 	}
 
 	/**
-	 * Generate a compilation stacktrace from the given parameter.
+	 * Factory method for create an {@link URI} with the given uri string.
 	 *
-	 * @param diagnosticCollectors
-	 *            the diagnostic collectors
-	 * @return the generated stacktrace string.
+	 * @param uriString
+	 *            the uri string
+	 * @return the created {@link URI}.
 	 */
-	public static String generateCompilationStacktrace(
-		final DiagnosticCollector<JavaFileObject> diagnosticCollectors)
+	public static URI newURIQuietly(final String uriString)
 	{
-		final StringBuilder sb = new StringBuilder();
-		for (final Diagnostic<? extends JavaFileObject> diagnostic : diagnosticCollectors
-			.getDiagnostics())
+		try
 		{
-			sb.append(diagnostic.getMessage(null));
-			sb.append(SeparatorConstants.SEMI_COLON_WHITE_SPACE);
+			final URI uri = newURI(uriString);
+			return uri;
 		}
-		return sb.toString();
+		catch (final URISyntaxException e)
+		{
+			throw new CompilerRuntimeException(
+				"Given String " + uriString + " does not match to an uri", e);
+		}
 	}
 
 }

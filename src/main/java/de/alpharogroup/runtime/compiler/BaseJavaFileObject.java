@@ -1,3 +1,27 @@
+/**
+ * The MIT License
+ *
+ * Copyright (C) 2015 Asterios Raptis
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package de.alpharogroup.runtime.compiler;
 
 import java.io.ByteArrayOutputStream;
@@ -20,6 +44,17 @@ public class BaseJavaFileObject extends SimpleJavaFileObject
 	/**
 	 * Instantiates a new {@link BaseJavaFileObject}.
 	 *
+	 * @param name
+	 *            the name
+	 */
+	public BaseJavaFileObject(final String name)
+	{
+		super(CompilerExtensions.newURIQuietly(name), Kind.CLASS);
+	}
+
+	/**
+	 * Instantiates a new {@link BaseJavaFileObject}.
+	 *
 	 * @param baseName
 	 *            the base name
 	 * @param javaSource
@@ -33,14 +68,13 @@ public class BaseJavaFileObject extends SimpleJavaFileObject
 	}
 
 	/**
-	 * Instantiates a new {@link BaseJavaFileObject}.
+	 * Gets the byte array.
 	 *
-	 * @param name
-	 *            the name
+	 * @return the byte array.
 	 */
-	public BaseJavaFileObject(final String name)
+	public byte[] getBytes()
 	{
-		super(CompilerExtensions.newURIQuietly(name), Kind.CLASS);
+		return this.javaByteCode.toByteArray();
 	}
 
 	/**
@@ -59,16 +93,6 @@ public class BaseJavaFileObject extends SimpleJavaFileObject
 	public OutputStream openOutputStream()
 	{
 		return this.javaByteCode;
-	}
-
-	/**
-	 * Gets the byte array.
-	 *
-	 * @return the byte array.
-	 */
-	public byte[] getBytes()
-	{
-		return this.javaByteCode.toByteArray();
 	}
 
 }
