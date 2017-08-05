@@ -20,6 +20,17 @@ public class BaseJavaFileObject extends SimpleJavaFileObject
 	/**
 	 * Instantiates a new {@link BaseJavaFileObject}.
 	 *
+	 * @param name
+	 *            the name
+	 */
+	public BaseJavaFileObject(final String name)
+	{
+		super(CompilerExtensions.newURIQuietly(name), Kind.CLASS);
+	}
+
+	/**
+	 * Instantiates a new {@link BaseJavaFileObject}.
+	 *
 	 * @param baseName
 	 *            the base name
 	 * @param javaSource
@@ -33,14 +44,13 @@ public class BaseJavaFileObject extends SimpleJavaFileObject
 	}
 
 	/**
-	 * Instantiates a new {@link BaseJavaFileObject}.
+	 * Gets the byte array.
 	 *
-	 * @param name
-	 *            the name
+	 * @return the byte array.
 	 */
-	public BaseJavaFileObject(final String name)
+	public byte[] getBytes()
 	{
-		super(CompilerExtensions.newURIQuietly(name), Kind.CLASS);
+		return this.javaByteCode.toByteArray();
 	}
 
 	/**
@@ -59,16 +69,6 @@ public class BaseJavaFileObject extends SimpleJavaFileObject
 	public OutputStream openOutputStream()
 	{
 		return this.javaByteCode;
-	}
-
-	/**
-	 * Gets the byte array.
-	 *
-	 * @return the byte array.
-	 */
-	public byte[] getBytes()
-	{
-		return this.javaByteCode.toByteArray();
 	}
 
 }

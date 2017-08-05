@@ -37,20 +37,12 @@ public class BaseJavaFileManager extends ForwardingJavaFileManager<JavaFileManag
 	}
 
 	/**
-	 * Initialize this {@link BaseJavaFileManager} object with the given java source file object and
-	 * the given compiled java file object.
-	 *
-	 * @param javaSourceFileObject
-	 *            the java source file object
-	 * @param compiledJavaFileObject
-	 *            the compiled java file object
+	 * {@inheritDoc}
 	 */
-	public void initialize(final BaseJavaFileObject javaSourceFileObject,
-		final BaseJavaFileObject compiledJavaFileObject)
+	@Override
+	public ClassLoader getClassLoader(final Location location)
 	{
-		this.javaSourceFileObject = javaSourceFileObject;
-		this.compiledJavaFileObject = compiledJavaFileObject;
-		this.runtimeCompilerClassLoader.setCompiledJavaFileObject(this.compiledJavaFileObject);
+		return this.runtimeCompilerClassLoader;
 	}
 
 	/**
@@ -74,12 +66,20 @@ public class BaseJavaFileManager extends ForwardingJavaFileManager<JavaFileManag
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Initialize this {@link BaseJavaFileManager} object with the given java source file object and
+	 * the given compiled java file object.
+	 *
+	 * @param javaSourceFileObject
+	 *            the java source file object
+	 * @param compiledJavaFileObject
+	 *            the compiled java file object
 	 */
-	@Override
-	public ClassLoader getClassLoader(final Location location)
+	public void initialize(final BaseJavaFileObject javaSourceFileObject,
+		final BaseJavaFileObject compiledJavaFileObject)
 	{
-		return this.runtimeCompilerClassLoader;
+		this.javaSourceFileObject = javaSourceFileObject;
+		this.compiledJavaFileObject = compiledJavaFileObject;
+		this.runtimeCompilerClassLoader.setCompiledJavaFileObject(this.compiledJavaFileObject);
 	}
 
 }

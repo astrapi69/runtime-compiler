@@ -12,23 +12,23 @@ public class CompilerRuntimeException extends RuntimeException
 	/**
 	 * Instantiates a new {@link CompilerRuntimeException}.
 	 *
-	 * @param message
-	 *            the message
-	 */
-	public CompilerRuntimeException(final String message)
-	{
-		super(message);
-	}
-
-	/**
-	 * Instantiates a new {@link CompilerRuntimeException}.
-	 *
 	 * @param cause
 	 *            the cause
 	 */
 	public CompilerRuntimeException(final Exception cause)
 	{
 		super(cause);
+	}
+
+	/**
+	 * Instantiates a new {@link CompilerRuntimeException}.
+	 *
+	 * @param message
+	 *            the message
+	 */
+	public CompilerRuntimeException(final String message)
+	{
+		super(message);
 	}
 
 	/**
