@@ -27,7 +27,7 @@ package de.alpharogroup.runtime.compiler;
 import org.testng.annotations.Test;
 
 /**
- * Test class for the class {@link JavaSourceCompiler}.
+ * The unit test class for the class {@link JavaSourceCompiler}.
  *
  */
 public class JavaSourceCompilerTest
