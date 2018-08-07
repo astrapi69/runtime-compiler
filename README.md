@@ -25,9 +25,13 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 
 Than you can add the dependency to your dependencies:
 
+	<properties>
+			...
 		<!-- RUNTIME-COMPILER version -->
 		<runtime-compiler.version>1.1.0</runtime-compiler.version>
-
+			...
+	</properties>
+			...
 		<dependencies>
 			...
 			<!-- RUNTIME-COMPILER DEPENDENCY -->
