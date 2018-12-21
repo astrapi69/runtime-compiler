@@ -36,14 +36,14 @@ import javax.tools.JavaFileObject.Kind;
 public class BaseJavaFileManager extends ForwardingJavaFileManager<JavaFileManager>
 {
 
-	/** The runtime compiler class loader. */
-	private RuntimeCompilerClassLoader runtimeCompilerClassLoader;
+	/** The compiled java file object. */
+	private BaseJavaFileObject compiledJavaFileObject;
 
 	/** The java source file object. */
 	private BaseJavaFileObject javaSourceFileObject;
 
-	/** The compiled java file object. */
-	private BaseJavaFileObject compiledJavaFileObject;
+	/** The runtime compiler class loader. */
+	private RuntimeCompilerClassLoader runtimeCompilerClassLoader;
 
 	/**
 	 * Instantiates a new {@link BaseJavaFileManager}.

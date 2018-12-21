@@ -42,17 +42,17 @@ import javax.tools.ToolProvider;
 public class JavaSourceCompiler<T>
 {
 
-	/** The system java compiler. */
-	private JavaCompiler systemJavaCompiler;
-
 	/** The base java file manager. */
 	private BaseJavaFileManager baseJavaFileManager;
+
+	/** The diagnostic listener. */
+	private DiagnosticCollector<JavaFileObject> diagnosticCollectors;
 
 	/** The runtime compiler class loader. */
 	private RuntimeCompilerClassLoader runtimeCompilerClassLoader;
 
-	/** The diagnostic listener. */
-	private DiagnosticCollector<JavaFileObject> diagnosticCollectors;
+	/** The system java compiler. */
+	private JavaCompiler systemJavaCompiler;
 
 	/**
 	 * Instantiates a new java source compiler.
