@@ -35,11 +35,11 @@ import javax.tools.SimpleJavaFileObject;
 public class BaseJavaFileObject extends SimpleJavaFileObject
 {
 
-	/** The java source. */
-	private String javaSource;
-
 	/** The byte code. */
 	private ByteArrayOutputStream javaByteCode = new ByteArrayOutputStream();
+
+	/** The java source. */
+	private String javaSource;
 
 	/**
 	 * Instantiates a new {@link BaseJavaFileObject}.

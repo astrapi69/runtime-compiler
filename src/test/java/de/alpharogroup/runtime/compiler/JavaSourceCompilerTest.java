@@ -27,7 +27,7 @@ package de.alpharogroup.runtime.compiler;
 import org.testng.annotations.Test;
 
 /**
- * Test class for the class {@link JavaSourceCompiler}.
+ * The unit test class for the class {@link JavaSourceCompiler}.
  *
  */
 public class JavaSourceCompilerTest
@@ -41,11 +41,11 @@ public class JavaSourceCompilerTest
 	 * @throws IllegalAccessException
 	 *             the illegal access exception
 	 */
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCompile() throws InstantiationException, IllegalAccessException
 	{
 		final JavaSourceCompiler<Runnable> runtimeCompiler = new JavaSourceCompiler<>();
-		final String source = "public final class FooRunnable implements Runnable { public void run() { System.out.println(\"Foo bar\"); } } ";
+		final String source = "public final class FooRunnable implements Runnable { public void run() { System.out.println(\"Foo bar bla\"); } } ";
 		final Class<Runnable> clazz = runtimeCompiler.compile(null, "FooRunnable", source);
 		final Runnable r = clazz.newInstance();
 		r.run();
