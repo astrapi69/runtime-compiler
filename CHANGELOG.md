@@ -12,7 +12,7 @@ ADDED:
 
 CHANGED:
 
-- update of parent version to 4.2
+- update of parent version to 4.4
 - update of commons-lang3 version to 3.8.1
 
 Notable links:
