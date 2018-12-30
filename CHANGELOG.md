@@ -4,6 +4,10 @@
 Version 1.3-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update of parent version to 4.5
+
 Version 1.2
 -------------
 
