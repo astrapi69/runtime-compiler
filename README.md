@@ -13,6 +13,8 @@
 
 The runtime-compiler project is a utility library for compiling java code ad-hoc.
 
+If you like this project put a ⭐ and donate
+
 ## License
 
 The source code comes under the liberal MIT License, making runtime-compiler great for all types of applications.
