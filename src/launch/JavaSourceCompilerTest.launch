@@ -5,10 +5,10 @@
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="runtime-compiler"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
 <mapAttribute key="org.testng.eclipse.ALL_CLASS_METHODS">
-<mapEntry key="de.alpharogroup.runtime.compiler.JavaSourceCompilerTest" value=""/>
+<mapEntry key="io.github.astrapi69.runtime.compiler.JavaSourceCompilerTest" value=""/>
 </mapAttribute>
 <listAttribute key="org.testng.eclipse.CLASS_TEST_LIST">
-<listEntry value="de.alpharogroup.runtime.compiler.JavaSourceCompilerTest"/>
+<listEntry value="io.github.astrapi69.runtime.compiler.JavaSourceCompilerTest"/>
 </listAttribute>
 <booleanAttribute key="org.testng.eclipse.DEBUG" value="false"/>
 <listAttribute key="org.testng.eclipse.GROUP_LIST"/>

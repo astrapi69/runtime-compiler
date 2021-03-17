@@ -22,33 +22,39 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.runtime.compiler;
+package io.github.astrapi69.runtime.compiler;
 
-import org.testng.annotations.Test;
+import lombok.Setter;
 
 /**
- * The unit test class for the class {@link JavaSourceCompiler}.
- *
+ * The class {@link RuntimeCompilerClassLoader}.
  */
-public class JavaSourceCompilerTest
+public class RuntimeCompilerClassLoader extends ClassLoader
 {
 
+	/** The compiled java file object. */
+	@Setter
+	private BaseJavaFileObject compiledJavaFileObject;
+
 	/**
-	 * Test for method {@link JavaSourceCompiler#compile(String, String, String)}
+	 * Instantiates a new {@link RuntimeCompilerClassLoader}.
 	 *
-	 * @throws InstantiationException
-	 *             the instantiation exception
-	 * @throws IllegalAccessException
-	 *             the illegal access exception
+	 * @param parentClassLoader
+	 *            the parent class loader
 	 */
-	@Test(enabled = true)
-	public void testCompile() throws InstantiationException, IllegalAccessException
+	public RuntimeCompilerClassLoader(final ClassLoader parentClassLoader)
 	{
-		final JavaSourceCompiler<Runnable> runtimeCompiler = new JavaSourceCompiler<>();
-		final String source = "public final class FooRunnable implements Runnable { public void run() { System.out.println(\"Foo bar bla\"); } } ";
-		final Class<Runnable> clazz = runtimeCompiler.compile(null, "FooRunnable", source);
-		final Runnable r = clazz.newInstance();
-		r.run();
+		super(parentClassLoader);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Class<?> findClass(final String qualifiedClassName)
+	{
+		final byte[] bytes = this.compiledJavaFileObject.getBytes();
+		return defineClass(qualifiedClassName, bytes, 0, bytes.length);
 	}
 
 }
