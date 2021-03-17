@@ -1,0 +1,171 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.ben-manes:gradle-versions-plugin:$gradlePluginVersionsVersion"
+        classpath "gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:$licenseGradlePluginVersion"
+    }
+}
+
+apply plugin: "java"
+apply plugin: "maven-publish"
+apply plugin: "signing"
+apply plugin: "com.github.ben-manes.versions"
+apply plugin: "com.github.hierynomus.license"
+apply plugin: "jacoco"
+
+group = "$groupPackage"
+version = "$projectVersion"
+description = "$rootProject.name"
+sourceCompatibility = "$projectSourceCompatibility"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+def releaseVersion = !version.endsWith("SNAPSHOT")
+
+license {
+    ext.year = "$projectInceptionYear"
+    ext.owner = "$projectLeaderName"
+    header rootProject.file("src/main/resources/LICENSE.txt")
+    excludes(["**/README",
+              "**/README.md",
+              "**/LICENSE",
+              "**/NOTICE",
+              "**/*.xml",
+              "**/*.xsl",
+              "**/*.xsd",
+              "**/*.dtd",
+              "**/*.html",
+              "**/*.jsp",
+              "**/*.jpa",
+              "**/*.sql",
+              "**/*.properties",
+              "**/*.bat",
+              "**/*.gradle",
+              "**/*.MF",
+              "**/*.txt",
+              "**/*.vm",
+              "**/*.log",
+              "**/*.map",
+              "**/*.js.map",
+              "**/*.tmpl",
+              "**/*.js.tmpl",
+              "**/*.editorconfig",
+              "**/*.lombok.config",
+              "src/test/resources/**",
+              "src/main/resources/**",
+              "out/**",
+              "build/**"])
+}
+
+// workhack for license issue #76
+gradle.startParameter.excludedTaskNames += "licenseMain"
+gradle.startParameter.excludedTaskNames += "licenseTest"
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.allJava)
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveClassifier.set("javadoc")
+    javadoc.properties.failOnError = true
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = "$rootProject.name"
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            pom {
+                name = "$rootProject.name"
+                description = "$projectDescription"
+                url = "$projectScmProviderUrl" + "$projectHolderUsername" + "$slash" + "$rootProject.name"
+                organization {
+                    name = "$projectOrganizationName"
+                    url = "$projectOrganizationUrl"
+                }
+                issueManagement {
+                    system = "$projectIssueManagementSystem"
+                    url = "$projectScmProviderUrl" + "$projectHolderUsername" + "$slash" + "$rootProject.name" + "$issuesPath"
+                }
+                licenses {
+                    license {
+                        name = "$projectLicenseName"
+                        url = "$projectLicenseUrl"
+                        distribution = "$projectLicenseDistribution"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "$projectHolderUsername"
+                        name = "$projectLeaderName"
+                    }
+                }
+                scm {
+                    connection = "$projectScmGitUrlPrefix" + "$projectScmProviderDomain" + "$colon" + "$projectHolderUsername" + "$slash" + "$rootProject.name" + "$projectScmGitUrlSuffix"
+                    developerConnection = "$projectScmGitUrlPrefix" + "$projectScmProviderDomain" + "$colon" + "$projectHolderUsername" + "$slash" + "$rootProject.name" + "$projectScmGitUrlSuffix"
+                    url = "$projectScmGitUrlPrefix" + "$projectScmProviderDomain" + "$colon" + "$projectHolderUsername" + "$slash" + "$rootProject.name" + "$projectScmGitUrlSuffix"
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username System.getenv("$projectRepositoriesUserNameKey") ?: project.property("$projectRepositoriesUserNameKey")
+                password System.getenv("$projectRepositoriesPasswordKey") ?: project.property("$projectRepositoriesPasswordKey")
+            }
+            def releasesRepoUrl = "$projectRepositoriesReleasesRepoUrl"
+            def snapshotsRepoUrl = "$projectRepositoriesSnapshotsRepoUrl"
+            url = releaseVersion ? releasesRepoUrl : snapshotsRepoUrl
+        }
+    }
+}
+
+signing {
+    if (releaseVersion) {
+        sign publishing.publications.mavenJava
+    }
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption("html5", true)
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+test {
+    useTestNG()
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
+check.dependsOn jacocoTestReport
+
+dependencies {
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    implementation("commons-beanutils:commons-beanutils:$commonsBeanutilsVersion")
+    implementation("org.apache.commons:commons-lang3:$commonsLang3Version")
+    testImplementation("org.testng:testng:$testngVersion")
+}
