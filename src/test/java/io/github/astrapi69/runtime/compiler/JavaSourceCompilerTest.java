@@ -24,7 +24,6 @@
  */
 package io.github.astrapi69.runtime.compiler;
 
-import io.github.astrapi69.runtime.compiler.JavaSourceCompiler;
 import org.testng.annotations.Test;
 
 /**
