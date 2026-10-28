@@ -35,4 +35,6 @@ jobs:
         with:
           # The graph plugin registers its resolving task once the projects are evaluated, which
           # configure-on-demand does not wait for
-          additional-arguments: -Dorg.gradle.configureondemand=false
+          # The build reads the credentials of the shut-down OSSRH while configuring; the graph needs
+          # none, so placeholders let it configure
+          additional-arguments: -Dorg.gradle.configureondemand=false -PossrhUsername=unused -PossrhPassword=unused
