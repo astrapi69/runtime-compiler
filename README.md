@@ -7,7 +7,7 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/runtime-compiler/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/runtime-compiler)
 [![Javadocs](http://www.javadoc.io/badge/io.github.astrapi69/runtime-compiler.svg)](http://www.javadoc.io/doc/io.github.astrapi69/runtime-compiler)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
-[![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
+[![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MJ7V43GU2H386)
 
 </div>
 
@@ -117,21 +117,13 @@ bug reports, or feature requests.
 
 No animals were harmed in the making of this library.
 
-# Donations
+## Support this project
 
-This project is kept as an open source product and relies on contributions to remain being
-developed. If you like this project, please consider a donation through
-paypal: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B37J9DZF6G9ZC" target="_blank">
-<img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" alt="PayPal this" title="PayPal – The safer, easier way to pay online!" border="0" />
-</a>
+If runtime-compiler is useful to you, a star on [GitHub](https://github.com/astrapi69/runtime-compiler) helps others find it.
+Sharing it or reporting a bug helps just as much.
 
-or over bitcoin or bitcoin-cash with:
-
-36JxRRDfRazLNqUV6NsywCw1q7TK38ukpC
-
-or over ether with:
-
-0x588Aa02De98B1Ef70afeDC3ec5290130a3E5e273
+If you would like to contribute financially, the channels are on the repository's Sponsor button, which
+reads [.github/FUNDING.yml](.github/FUNDING.yml): GitHub Sponsors, Liberapay, Ko-fi and PayPal.
 
 ## Credits
 
